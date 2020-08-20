@@ -12,24 +12,25 @@ services:
       - POSTGRES_PASSWORD:docker
       - POSTGRES_DB=authtdd
     volumes:
-      - "./database/postgres:/var/lib/postgresql/data"
+      - ".src/database/postgres:/var/lib/postgresql/data"
     ports:
       - 5432:5432
-  # api_node:
-  #   build: .
-  #   networks:
-  #     - authtdd
-  #   links:
-  #     - db_postgres
-  #   depends_on:
-  #     - db_postgres
-  #   container_name: "node_authtdd"
-  #   volumes:
-  #     - .:/usr/app
-  #   ports:
-  #     - 3000:3000
-  #   command: "sh /usr/app/start.sh"
-  # env_file: .dockerenv
+
+  api_node:
+    build: .
+    networks:
+      - authtdd
+    links:
+      - db_postgres
+    depends_on:
+      - db_postgres
+    container_name: "node_authtdd"
+    volumes:
+      - .:/usr/app
+    ports:
+      - 3000:3000
+    command: "sh /usr/app/start.sh"
+    env_file: .dockerenv
 
 networks:
   authtdd:
