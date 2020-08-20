@@ -1,18 +1,30 @@
+const request = require("supertest");
+
+const app = require("../../src/app");
+
 const { User } = require("../../src/app/models");
 
+const truncate = require("../utils/truncate");
+
 describe("Authentication", () => {
+  beforeEach(async () => {
+    await truncate();
+  });
+
   // it("It should received JWT token when authenticated with valid credentials", () => {});
 
-  it("should sum two numbers", async () => {
-    console.log("DSDJADJKNASJD");
+  it("should authenticate with valid credentials", async () => {
     const user = await User.create({
-      name: "Mathedwus",
-      email: "mathdwus@email.com",
+      name: "Matheus",
+      email: "matheuss@email.com",
       password_hash: "98273827382",
     });
 
-    console.log("USER", user);
+    const response = await request(app).post("/sessions").send({
+      email: user.email,
+      password: "123456",
+    });
 
-    expect(user.email).toBe("mathdwus@email.com");
+    expect(response.status).toBe(200);
   });
 });
