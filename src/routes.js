@@ -1,3 +1,11 @@
-const routes = require('express').Router()
+const routes = require("express").Router();
+const { User } = require("./app/models");
 
-module.exports = routes
+console.log("HEREE");
+User.create({
+  name: "Matheus",
+  email: "matheusblizard@gmail.com",
+  password_hash: "137182381823",
+});
+
+module.exports = routes;
