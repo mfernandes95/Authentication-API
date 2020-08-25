@@ -6,13 +6,13 @@ class SessionController {
 
     const user = await User.findOne({ where: { email } });
 
-    if (!user) res.status(401).json({ message: "User not found" });
+    if (!user) return res.status(401).json({ message: "User not found" });
 
     if (!(await user.checkPassword(password)))
-      res.status(401).json({ message: "Incorrect credentials" });
+      return res.status(401).json({ message: "Incorrect credentials" });
 
     // return res.json({ user });
-    return res.status(200).send();
+    return res.status(200).send({ user, token: user.generateToken() });
   }
 }
 
