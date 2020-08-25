@@ -16,15 +16,6 @@ describe("User", () => {
       password: "123456",
     });
 
-    // const compareHash = await bcrypt.compare(
-    //   "123456",
-    //   user.password_hash,
-    //   function (err, result) {
-    //     console.log("err", err);
-    //     console.log("res", result);
-    //   }
-    // );
-
     const compareHash = await bcrypt.compare("123456", user.password_hash);
 
     expect(compareHash).toBe(true);

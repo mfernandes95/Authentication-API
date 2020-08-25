@@ -14,7 +14,6 @@ module.exports = (sequelize, DataTypes) => {
       hooks: {
         beforeSave: async (user) => {
           if (user.password) {
-            console.log("PASSWORD");
             user.password_hash = await bcrypt.hash(user.password, 8);
           }
         },
@@ -27,7 +26,6 @@ module.exports = (sequelize, DataTypes) => {
   };
 
   User.prototype.generateToken = function () {
-    console.log("HEREEEEEE", process.env.APP_SECRET);
     return jwt.sign({ id: this.id }, process.env.APP_SECRET);
   };
 
