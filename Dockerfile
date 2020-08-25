@@ -5,7 +5,5 @@ WORKDIR /usr/app
 COPY package*.json ./
 
 RUN yarn
-RUN npm i --global @adonisjs/cli
-RUN npm i
 
 COPY . .

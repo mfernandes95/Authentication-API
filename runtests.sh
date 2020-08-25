@@ -1,0 +1,1 @@
+docker exec -i node_authtdd /bin/sh -c "yarn test"

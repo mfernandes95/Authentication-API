@@ -17,7 +17,7 @@ describe("Authentication", () => {
     const user = await User.create({
       name: "Matheus",
       email: "matheuss@email.com",
-      password_hash: "98273827382",
+      password: "123456",
     });
 
     const response = await request(app).post("/sessions").send({
@@ -26,5 +26,20 @@ describe("Authentication", () => {
     });
 
     expect(response.status).toBe(200);
+  });
+
+  it("should not authenticate with invalid credentials", async () => {
+    const user = await User.create({
+      name: "Matheus",
+      email: "matheuss@email.com",
+      password_hash: "123123",
+    });
+
+    const response = await request(app).post("/sessions").send({
+      email: user.email,
+      password: "123456",
+    });
+
+    expect(response.status).toBe(401);
   });
 });
