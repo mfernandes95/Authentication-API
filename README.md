@@ -1,4 +1,4 @@
-# Auth-tdd
+# Authentication-API
 
 API in NodeJS using: Express, JWT, Postgres, Jest, Docker. To authenticate users.
 
